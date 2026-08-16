@@ -1,0 +1,31 @@
+name: tordo-corvus
+
+services:
+  api:
+    build:
+      context: ../apps/api
+      dockerfile: Dockerfile
+    container_name: corvus
+    restart: unless-stopped
+    environment:
+      HTTP_PORT: 8086
+      DB_URL: jdbc:postgresql://tordo_postgres:5432/${DB_NAME:-tordo}?currentSchema=corvus
+      DB_USERNAME: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-yourpassword}
+      RABBITMQ_HOST: tordo_rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: ${RABBITMQ_USER:-tordo}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-changeme}
+      OBJECT_STORAGE_ENDPOINT: ${OBJECT_STORAGE_ENDPOINT:-http://minio:9000}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8086/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - tordo_network
+
+networks:
+  tordo_network:
+    external: true

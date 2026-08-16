@@ -1,0 +1,21 @@
+# Gradle cache & outputs
+.gradle/
+build/
+!build/quarkus-app/
+
+# Source not needed at runtime
+src/test/
+src/main/resources/application-dev.properties
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Env & secrets
+.env
+.env.*
+
+# Docs & misc
+*.md
+*.log
