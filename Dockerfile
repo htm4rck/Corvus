@@ -19,5 +19,6 @@ WORKDIR /app
 COPY --from=api /workspace/Corvus/target/release/corvus-api /app/api
 COPY --from=ui /ui/dist/corvus-ui/browser/ /app/ui/
 ENV UI_DIR=/app/ui
+EXPOSE 8086
 USER 1000:1000
 ENTRYPOINT ["/app/api"]
