@@ -1,73 +1,46 @@
-# Corvus Intelligence Platform
+# Corvus
 
-Corvus es el componente de inteligencia de datos para el ecosistema Tordo. Su primera versión expone una API Quarkus para recibir eventos operativos, registrar lotes históricos y habilitar KPIs iniciales sobre una base PostgreSQL compartida.
+Backend Rust y UI Angular básica para la plataforma de datos analíticos de Tordo. Reimplementación iniciada por decisión del propietario el 2026-10-30. Los modelos, puertos y casos de uso viven en Tordo.SDK/rust/corvus-core siguiendo la arquitectura Business/SDK.Business.
 
-## Stack
+La primera fase entrega eventos durables con replay compatible, lotes con validación estructural real, publicación transaccional de snapshots, alcance por empresa y una UI de operación inicial. Añade el piloto comercial Acme con curado de comprobantes/pedidos y serving de tres consultas registradas. Ingesta incremental, catálogo universal, linaje y workers siguen pendientes.
 
-| Capa | Tecnología |
-| --- | --- |
-| Backend | Java 21, Quarkus 3.17 |
-| Persistencia | PostgreSQL, Hibernate ORM Panache, Flyway |
-| Observabilidad | SmallRye Health, Micrometer Prometheus, OpenAPI |
-| Infra local | Docker Compose, `tordo_network` |
-| Integración prevista | RabbitMQ, MinIO, Kong, Keycloak |
+El backend Quarkus previo y su README se conservan íntegros en legacy/. AnpyeReports permanece en su repositorio; Tordo.Reports es el nuevo producto complementario de BI.
 
-## Endpoints iniciales
+## Ejecutar y verificar
 
-```http
-GET  /health
-GET  /metrics
-GET  /openapi
-GET  /api/v1/capabilities
-POST /api/v1/events
-POST /api/v1/import-batches
-GET  /api/v1/import-batches/{id}
-POST /api/v1/import-batches/{id}/validate
-POST /api/v1/import-batches/{id}/confirm
-GET  /analytics/v1/companies/{companyId}/kpis
+Requiere Tordo.SDK y Tordo.Reports como checkouts hermanos, Rust 1.85.1, Node 24, Docker y la red DEV de Tordo.Platform. Los lockfiles están versionados.
+
+```sh
+cargo build --locked
+cargo clippy --locked --all-targets -- -D warnings
+cd apps/ui
+npm ci
+npm run build -- --base-href /corvus/
+npm test -- --watch=false
+cd ../..
+python3 scripts/bootstrap_dev.py
+python3 scripts/bootstrap_mysql_dev.py
+python3 scripts/apply_dev_routes.py
+python3 scripts/verify_dev.py
 ```
 
-## Ejecución local
+También se debe compilar Tordo.Reports y su UI antes del bootstrap compartido. Los scripts sólo provisionan las nuevas bases/servicios analytics DEV. El token para las operaciones del fixture está en .runtime/stack.json, archivo privado excluido de Git.
 
-Corvus espera que `tordo.platform` haya creado `tordo_network` y que PostgreSQL esté disponible como `tordo_postgres`.
+- UI DEV: https://dev.tordo.io/corvus/
+- UI local mediante gateway: http://127.0.0.1:8000/corvus/
+- Salud: /corvus/health mediante gateway, o http://127.0.0.1:8086/health
 
-```bash
-cd Corvus/infra
-docker compose up --build
-```
+Ver [arquitectura, contratos, continuidad y límites](docs/architecture.md). No hay migración de datos históricos ni despliegue de producción en esta primera fase.
 
-Para desarrollo directo:
+## Piloto Acme disponible en DEV
 
-```bash
-cd Corvus/apps/api
-./gradlew quarkusDev
-```
+[Acme: ingesta Birdport/Amazilia y tres reportes](docs/acme-sales-ingestion-design.md), con reconocimiento de datos DEV y requisitos de homologación a la arquitectura Business. Estado: ejecutado y verificado. Ver [operación y aceptación](docs/acme-pilot-runbook.md).
 
-## Contrato de evento
 
-```json
-{
-  "eventId": "evt-001",
-  "eventType": "sale.completed",
-  "eventVersion": "1.0",
-  "occurredAt": "2026-07-21T10:30:00-05:00",
-  "tenantId": "tenant-001",
-  "companyId": "company-001",
-  "sourceSystem": "amazilia",
-  "entityId": "sale-12345",
-  "data": {
-    "totalAmount": 125.5,
-    "currency": "PEN"
-  }
-}
-```
+## Ingesta por dominio, sin componentes por empresa
 
-Corvus guarda el evento original como JSONB antes de cualquier normalización. El identificador `eventId` es único por `tenantId`.
+El producto organiza definiciones reutilizables de ingesta por dominio y scope de empresa. `sales_documents` publica bronce, plata y oro en esquemas separados. Acme es configuración/datos del ejemplo, no un componente. El modelo vigente está en `Tordo.SDK/rust/docs/analytics-product-model.md`; ver [operación por dominio](docs/runbook.md).
 
-## Siguiente implementación recomendada
+## Publicación
 
-1. Agregar almacenamiento Raw en MinIO para archivos históricos y documentos.
-2. Implementar `POST /api/v1/import-batches/{id}/files` con multipart upload, checksum y antivirus.
-3. Publicar consumidores RabbitMQ para eventos `sale.completed`, `payment.confirmed` e `inventory.receipt.completed`.
-4. Crear tablas standardized y curated para ventas diarias, gastos, compras, bancos e inventario.
-5. Agregar cierre diario y cierre mensual versionado.
+Ver [CI e imágenes para DEV](docs/RELEASE_DEV.md). La publicación utiliza la distribución Rust del SDK fijada a un commit; no depende de cambios locales sin publicar.

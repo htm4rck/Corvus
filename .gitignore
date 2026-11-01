@@ -31,3 +31,14 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Rust and private DEV state
+/target/
+/.runtime/
+/core
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.pyc

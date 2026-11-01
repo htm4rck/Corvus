@@ -1,0 +1,1 @@
+:host{display:block;min-width:0}.layers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.layers article{border-left:3px solid var(--accent);padding-left:1rem}.metadata{overflow-wrap:anywhere;font-variant-numeric:tabular-nums}@media(max-width:750px){.layers{grid-template-columns:minmax(0,1fr)}}

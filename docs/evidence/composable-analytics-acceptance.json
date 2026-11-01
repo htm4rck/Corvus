@@ -1,0 +1,26 @@
+{
+  "environment": "DEV",
+  "checks": [
+    "domain pipeline publishes real PEN186 through separate bronze, normalized silver and materialized gold",
+    "source discovery and gold model schemas are served as metadata",
+    "same domain and same run key work in two independent pipelines; second company cannot read the first",
+    "quality failure retains unmodified QA bronze and leaves the previous silver/gold head unchanged",
+    "PostgreSQL promotion rollback preserves bronze and rolls back silver, gold, head, checkpoint and audit",
+    "snapshot CAS serializes a pipeline without changing another pipeline head",
+    "one arbitrary SQL question powers bar/pie/number visualizations reused by dashboards for different capabilities",
+    "published dashboard freezes query/chart/dashboard versions; draft edits and optimistic conflicts preserve the publication",
+    "query, visualization, dashboard, publication, execution and export references are company-scoped",
+    "dashboard exports contain all card tables plus provenance metadata, with exact decimals",
+    "new BI definitions, immutable versions and audit share a PostgreSQL unit of work",
+    "example dashboard is generic catalog data, pins one Corvus cut and never falls back to the operational database"
+  ],
+  "realCompanySnapshot": "159ac5a2-0f52-4c48-8661-d602cc81294b",
+  "exampleDashboardId": "df3eaff6-309c-44fd-b10b-e8caa29e65b6",
+  "exampleRunId": "012d003f-c7b5-4317-ae08-0fb7fb1a4830",
+  "secondCompany": {
+    "pipelineId": "78e1d711-a244-4548-a645-61cb43d14593",
+    "dashboardId": "40300591-0e2a-4379-ac22-cb900aabd113",
+    "publicationId": "66f78873-b556-4b6a-be0c-672bb0aaf88d"
+  },
+  "verifiedAt": "2026-10-30T16:40:38.093751+00:00"
+}

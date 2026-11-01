@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-10-30T04:50:59.193788+00:00",
+  "scope": "Rust/Angular foundation, DEV only",
+  "builds": {
+    "corvusRust": "passed",
+    "reportsRust": "passed",
+    "corvusAngular": "passed",
+    "reportsAngular": "passed",
+    "clippy": "passed with warnings denied",
+    "format": "passed",
+    "coreArchitecture": "passed"
+  },
+  "unitTests": {
+    "corvusCore": 2,
+    "reportsSqlAdmission": 1,
+    "reportsUI": 2,
+    "corvusUI": 1
+  },
+  "functional": {
+    "status": "passed",
+    "groups": [
+      "health and authentication boundaries",
+      "concurrent event replay and conflicting payload",
+      "batch validation, immutable snapshots and tenant isolation",
+      "real PostgreSQL rollback of batch and snapshot transaction",
+      "multiple connections to the same engine and secret scope",
+      "saved queries, versions, real reader connection and tenant isolation",
+      "native parameter binding, duplicate columns and zero-row schema",
+      "SQL statement and relation admission",
+      "CSV/XLSX precision, formula safety and download authorization",
+      "dashboard references scoped to the same tenant",
+      "MySQL 8 real reader, decimal values, Unicode and native parameter binding",
+      "bounded preview cannot be exported as a complete result"
+    ],
+    "services": [
+      "corvus",
+      "reports"
+    ],
+    "database": "isolated analytics DEV"
+  },
+  "browser": {
+    "results": [
+      {
+        "name": "reports",
+        "axeViolations": [],
+        "mobileOverflow": false
+      },
+      {
+        "name": "corvus",
+        "axeViolations": [],
+        "mobileOverflow": false
+      },
+      {
+        "publicDev": "reports",
+        "title": "Tordo.Reports",
+        "ready": true
+      },
+      {
+        "publicDev": "corvus",
+        "title": "Corvus",
+        "ready": true
+      }
+    ],
+    "errors": []
+  },
+  "sources": {
+    "generatedAt": "2026-10-30T04:48:50.541331+00:00",
+    "sourceHashes": {
+      "Corvus/apps/api/src/main.rs": "b09c04d443848aa41891605e9603c9a7c7e38fd64a1cb3715d7f3615ff96c097",
+      "Corvus/apps/api/src/persistence.rs": "ca5f38f37a925388a98f410694d25b3a22f48a05310e4edd379a15c40e0dee73",
+      "Corvus/apps/api/src/http.rs": "53cc98b3bc62c76f8502df994343dd045e86f4d57b8bdac90a5f2a240d6f057a",
+      "Tordo.Reports/apps/api/src/main.rs": "e987fe666b193abd20b63488c5d602513a97eae5b7ebfbdf6dc98b9eb3f08772",
+      "Tordo.Reports/apps/api/src/persistence.rs": "843b0750d28a447c029fd70893f71419f310688b214c6869b959d81b0b82a42b",
+      "Tordo.Reports/apps/api/src/query.rs": "f80ca08f06c47ca6c6184f136eed9229d47ea94cbe9dcc8f7f89bfdabf8bfafa",
+      "Tordo.SDK/rust/corvus-core/src/application/ports.rs": "69a97ebea00c466706b80d3c6b114bdb60ccd5cbf7909fb60dc315d7cccff2cc",
+      "Tordo.SDK/rust/reports-core/src/application/ports.rs": "8078dfc87ecbac1bd33bef4512f79971506cc1884958ba4c2ada3650df4207c4",
+      "Corvus/Cargo.lock": "2ab74b3baa6936e5ef84869ae65583bea3102060c6fa1307f1419e5120012d00",
+      "Tordo.Reports/Cargo.lock": "97082d4afb1c17519d7a2bf772bbce15ea794647c2306fcb139b5bf8e12e33e1",
+      "Tordo.SDK/rust/Cargo.lock": "d3e6b595e37979112b32fe5868b69cb68a4ab246f4c8e962b6baa93a6517c193"
+    },
+    "repositories": {
+      "Corvus": {
+        "branch": "codex/rust-foundation",
+        "baseCommit": "bdad41a2451d8fc463f3f23447c8e477e96d2eba",
+        "state": "local uncommitted foundation"
+      },
+      "Tordo.Reports": {
+        "branch": "main",
+        "baseCommit": null,
+        "state": "local uncommitted foundation"
+      },
+      "Tordo.SDK": {
+        "branch": "codex/homologacion-tordo",
+        "baseCommit": "0d5711e6ce70bbba630b3a67c9a955ff4aa55fc9",
+        "state": "local uncommitted foundation"
+      }
+    }
+  },
+  "legacyApiFilesPreserved": 25
+}

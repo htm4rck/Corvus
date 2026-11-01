@@ -1,0 +1,48 @@
+{
+  "environment": "DEV",
+  "tenantId": "B20123456789",
+  "checkedSnapshot": "b52f8922-5684-41e7-b8ff-a603e95f78fa",
+  "currentSnapshot": "a2c61879-8584-4ddd-a627-5e4faa74ec93",
+  "checks": [
+    "actual DEV cut: 2 approved invoices PEN186, 20 fixtures excluded, 10 unclassified; compatible replay",
+    "three registered queries: exact totals, shipping separate, distinct order coverage, filters, empty schema and tenant denials",
+    "PostgreSQL publication rollback includes facts, current head, checkpoint and audit",
+    "concurrent publication is serialized by tenant with expected-snapshot CAS",
+    "Reports HTTP Corvus adapter: 3 saved questions pinned to older snapshot, exact export and tenant isolation",
+    "Reports PostgreSQL UoW rollback: report, immutable version and audit",
+    "Corvus outage returns CORVUS_UNAVAILABLE with no operational fallback",
+    "operational reader privileges: export views only, no base-table read/write or evidence access"
+  ],
+  "quality": {
+    "invoiceCount": 2,
+    "invoiceLineCount": 3,
+    "orderCount": 32,
+    "technicalOrderCount": 20,
+    "unclassifiedOrderCount": 10,
+    "businessOrderCount": 2,
+    "approvedInvoiceCount": 2,
+    "approvedInvoiceTotals": {
+      "PEN": "186.00"
+    },
+    "warnings": [
+      "La conversi\u00f3n no se certifica: existen pedidos sin clasificaci\u00f3n de negocio/prueba"
+    ]
+  },
+  "reports": [
+    {
+      "id": "e6fb5d03-146f-4d9c-a0bc-9164be39e754",
+      "executionId": "f3e2bb1e-490e-4220-b47f-9e4cfafd1a5e",
+      "snapshotId": "b52f8922-5684-41e7-b8ff-a603e95f78fa"
+    },
+    {
+      "id": "abfd8741-7a0e-4488-9331-742ee836994e",
+      "executionId": "e388d361-9414-4450-8b0f-2ef9c894438e",
+      "snapshotId": "b52f8922-5684-41e7-b8ff-a603e95f78fa"
+    },
+    {
+      "id": "8a17c1f9-d2a1-495a-bc76-f659313696c4",
+      "executionId": "b92af360-43bc-4215-b565-14b324bfc9ce",
+      "snapshotId": "b52f8922-5684-41e7-b8ff-a603e95f78fa"
+    }
+  ]
+}

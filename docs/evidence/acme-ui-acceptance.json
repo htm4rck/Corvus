@@ -1,0 +1,9 @@
+{
+  "environment": "DEV",
+  "checks": [
+    "corvus desktop: visible real data, no axe violations or horizontal overflow",
+    "corvus mobile: visible real data, no axe violations or horizontal overflow",
+    "reports desktop: visible real data, no axe violations or horizontal overflow",
+    "reports mobile: visible real data, no axe violations or horizontal overflow"
+  ]
+}

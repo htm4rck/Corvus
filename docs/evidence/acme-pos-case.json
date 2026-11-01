@@ -1,0 +1,17 @@
+{
+  "environment": "DEV",
+  "fiscalEnvironment": "BETA",
+  "originApplication": "amazilia",
+  "originEvidence": "CONTROLLED_AMAZILIA_CHECKOUT_API",
+  "interaction": "Contrato HTTP consumido por Amazilia; no automatización de la UI Flutter",
+  "invoiceId": "631a3c7e-064c-4ebb-a266-ebd28910184b",
+  "invoiceNumber": "B001-00000002",
+  "invoiceStatus": "APPROVED",
+  "total": "89.00",
+  "currency": "PEN",
+  "directPosWithoutOrder": true,
+  "paymentMode": "DEFERRED",
+  "noCollectionCreated": true,
+  "compatibleCheckoutReplay": true,
+  "proofHash": "40603d7de7734d960c198dbeed1fd668269a34086dfbbec68ab6fb390d773b6f"
+}

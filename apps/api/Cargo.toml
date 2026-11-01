@@ -1,0 +1,22 @@
+[package]
+name = "corvus-api"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+[dependencies]
+tordo-corvus-core = { path = "../../../Tordo.SDK/rust/corvus-core", version = "0.1.0" }
+tordo-commons-core = { path = "../../../Tordo.SDK/rust/commons-core", version = "0.1.0" }
+tordo-runtime = { path = "../../../Tordo.SDK/rust/runtime", version = "0.1.0" }
+tordo-analytics-contracts = {path="../../../Tordo.SDK/rust/analytics-contracts"}
+async-trait = "0.1"
+axum = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["arbitrary_precision"] }
+sqlx = { version = "0.8", features = ["runtime-tokio", "tls-rustls", "postgres", "json", "uuid", "chrono"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal", "net", "time"] }
+tower-http = { version = "0.6", features = ["trace", "fs"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+

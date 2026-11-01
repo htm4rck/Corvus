@@ -1,0 +1,41 @@
+name: tordo-analytics-api-dev
+services:
+  corvus:
+    image: ubuntu:26.04@sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
+    container_name: corvus-rust-dev
+    entrypoint: ["/app/api"]
+    user: "1000:1000"
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1.0
+    env_file: ../.runtime/container.env
+    ports: ["127.0.0.1:8086:8086"]
+    volumes:
+      - ../target/debug/corvus-api:/app/api:ro
+      - ../apps/ui/dist/corvus-ui/browser:/app/ui:ro
+    networks: [dev]
+  reports:
+    image: ubuntu:26.04@sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
+    container_name: reports-rust-dev
+    entrypoint: ["/app/api"]
+    user: "1000:1000"
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1.0
+    env_file: ../../Tordo.Reports/.runtime/container.env
+    ports: ["127.0.0.1:8087:8087"]
+    volumes:
+      - ../../Tordo.Reports/target/debug/reports-api:/app/api:ro
+      - ../../Tordo.Reports/apps/ui/dist/reports-ui/browser:/app/ui:ro
+    networks: [dev]
+networks:
+  dev:
+    external: true
+    name: tordo_dev_network
+

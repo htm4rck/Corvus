@@ -1,0 +1,12 @@
+{
+  "environment": "DEV",
+  "checks": [
+    "corvus desktop: no axe violations or page overflow",
+    "corvus mobile: no axe violations or page overflow",
+    "browser flow: connection → SQL question → independent bar/pie charts → configurable dashboard → publication → Excel export in second company",
+    "reports desktop: no axe violations or page overflow",
+    "reports mobile: no axe violations or page overflow",
+    "existing Acme sample renders as a saved dashboard through the same generic canvas"
+  ],
+  "verifiedAt": "2026-10-30T16:40:38.093993+00:00"
+}
