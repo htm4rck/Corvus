@@ -32,6 +32,14 @@ Los antiguos `import_batches` se conservan, pero no se convierten automáticamen
 
 Delta/CDC, correcciones/borrados incrementales, nuevos dominios, archivos/Parquet, SQL analítico general, linaje y workers recuperables. Ni MinIO ni RabbitMQ se anuncian implementados por figurar en el diseño anterior. El piloto Acme ya tiene extracción inicial manual, checkpoint de corte, conciliación, proyecciones versionadas y serving de tres consultas registradas.
 
+### Parquet: alcance futuro acordado el 2026-11-04
+
+La [distribución de formatos del stack](../../Tordo.SDK/rust/docs/analytics-product-model.md#parquet-en-el-alcance-futuro-del-stack) establece las obligaciones y aceptación comunes. Corvus deberá publicar en Parquet tipado los cinco conjuntos de plata comercial, sus históricos y los modelos de oro distribuidos como datasets o exportaciones masivas. La copia analítica de Accounting se incorporará mediante un contrato autorizado de diario/líneas confirmadas, preservando autoridad, reversos y precisión; cada dominio adicional necesita su propio contrato y aceptación.
+
+Bronce conserva el contrato de entrada JSONB y su hash, incluso cuando falle la calidad. Manifiestos, runs, permisos, checkpoint, puntero vigente y auditoría siguen bajo control PostgreSQL; las materializaciones de consulta pueden permanecer allí. Las APIs y eventos conservan JSON versionado.
+
+La entrega requiere adaptadores Parquet, procesamiento por lotes, trabajos recuperables y publicación que verifique todos los archivos antes de promover el manifiesto y el checkpoint. Debe probar aislamiento por empresa/pipeline, recuperación ante fallos y paridad contra los modelos PostgreSQL. Los límites de la carga manual actual siguen vigentes hasta entregar y verificar esa evolución. Parquet y almacenamiento de objetos continúan pendientes; esta sección no modifica las capacidades anunciadas por la API.
+
 ## DEV y verificación
 
 Rust 1.85.1 y lockfile fijados. Las APIs usan el SDK hermano por path; todavía no hay artefacto Cargo publicado. PostgreSQL de analytics y el MySQL opcional son contenedores nuevos de laboratorio; sus datos no pertenecen a las bases operativas del stack existente. Cada catálogo usa su base y usuario propios.
